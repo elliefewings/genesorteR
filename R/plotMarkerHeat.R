@@ -71,7 +71,7 @@
 #'
 #' @seealso
 #' plotTopMarkerHeat
-plotMarkerHeat = function(exp, classes, markers, colors = colorRampPalette(rev(c("orangered4","orangered","gray90","dodgerblue","dodgerblue4")))(n=100), newOrder = 1:length(unique(classes)), clusterGenes = FALSE, clusterGenesK = length(unique(classes)), averageCells = 0, outs = FALSE, plotheat = TRUE, gaps = TRUE, seed = 10) {
+plotMarkerHeat = function(exp, classes, markers, colors = colorRampPalette(rev(c("orangered4","orangered","gray90","dodgerblue","dodgerblue4")))(n=100), newOrder = 1:length(unique(classes)), clusterGenes = FALSE, clusterGenesK = length(unique(classes)), fontsize=8, averageCells = 0, outs = FALSE, plotheat = TRUE, gaps = TRUE, seed = 10) {
 
 	classes = as.integer(as.factor(classes))
 	map = data.frame(oldO = 1:length(unique(classes)), newO = newOrder)
@@ -109,13 +109,15 @@ plotMarkerHeat = function(exp, classes, markers, colors = colorRampPalette(rev(c
 		colnames(temp) = club #reassign column names
 	}
 	
+	#Create annotation for heatmap
+	anno <- data.frame(pseudotime=1:ncol(temp), row.names=colnames(temp))
 
 	if (clusterGenes) {
 		if (plotheat) {
 			if (gaps) {
-				p=pheatmap(temp, cluster_rows = FALSE, cluster_cols = FALSE, scale = "none", color = colors, display_numbers = F, fontsize = 5, show_colnames=FALSE, show_rownames=TRUE, breaks = seq(-cut,cut,length.out = 101), gaps_col = cumsum(table(as.integer(colnames(temp)))), gaps_row =  cumsum(table(kk)), border_color = NA)
+				p=pheatmap(temp, annotation_col=anno, annotation_legend=FALSE, cluster_rows = FALSE, cluster_cols = FALSE, scale = "none", color = colors, display_numbers = F, fontsize = fontsize, show_colnames=FALSE, show_rownames=TRUE, breaks = seq(-cut,cut,length.out = 101), gaps_col = cumsum(table(as.integer(colnames(temp)))), gaps_row =  cumsum(table(kk)), border_color = NA)
 			} else {
-				p=pheatmap(temp, cluster_rows = FALSE, cluster_cols = FALSE, scale = "none", color = colors, display_numbers = F, fontsize = 5, show_colnames=FALSE, show_rownames=TRUE, breaks = seq(-cut,cut,length.out = 101), border_color = NA)
+				p=pheatmap(temp, annotation_col=anno, annotation_legend=FALSE, cluster_rows = FALSE, cluster_cols = FALSE, scale = "none", color = colors, display_numbers = F, fontsize = fontsize, show_colnames=FALSE, show_rownames=TRUE, breaks = seq(-cut,cut,length.out = 101), border_color = NA)
 			}
 		} else {p = NULL}
 		if (outs) {
@@ -124,9 +126,9 @@ plotMarkerHeat = function(exp, classes, markers, colors = colorRampPalette(rev(c
     } else {
 		if (plotheat) {
 			if (gaps) {
-				p=pheatmap(temp, cluster_rows = FALSE, cluster_cols = FALSE, scale = "none", color = colors, display_numbers = F, fontsize = 5, show_colnames=FALSE, show_rownames=TRUE, breaks = seq(-cut,cut,length.out = 101), gaps_col = cumsum(table(as.integer(colnames(temp)))), border_color = NA)
+				p=pheatmap(temp, annotation_col=anno, annotation_legend=FALSE, cluster_rows = FALSE, cluster_cols = FALSE, scale = "none", color = colors, display_numbers = F, fontsize = fontsize, show_colnames=FALSE, show_rownames=TRUE, breaks = seq(-cut,cut,length.out = 101), gaps_col = cumsum(table(as.integer(colnames(temp)))), border_color = NA)
 			} else {
-				p=pheatmap(temp, cluster_rows = FALSE, cluster_cols = FALSE, scale = "none", color = colors, display_numbers = F, fontsize = 5, show_colnames=FALSE, show_rownames=TRUE, breaks = seq(-cut,cut,length.out = 101), border_color = NA)
+				p=pheatmap(temp, annotation_col=anno, annotation_legend=FALSE, cluster_rows = FALSE, cluster_cols = FALSE, scale = "none", color = colors, display_numbers = F, fontsize = fontsize, show_colnames=FALSE, show_rownames=TRUE, breaks = seq(-cut,cut,length.out = 101), border_color = NA)
 			}
 		} else {p = NULL}
 		if (outs) {
