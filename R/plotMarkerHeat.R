@@ -110,7 +110,7 @@ plotMarkerHeat = function(exp, classes, markers, colors = colorRampPalette(rev(c
 	}
 	
 	#Create annotation for heatmap
-	anno <- data.frame(pseudotime=1:ncol(temp), row.names=colnames(temp))
+	anno <- data.frame(pseudotime=1:ncol(temp), row.names=make.unique(as.character(colnames(temp)))
 
 	if (clusterGenes) {
 		if (plotheat) {
