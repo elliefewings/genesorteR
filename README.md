@@ -1,6 +1,10 @@
 genesorteR: Feature Ranking for Single Cell Data
 ======
 
+Forked from Mahmoud Ibrahim's [repository](https://github.com/mahmoudibrahim/genesorteR)
+
+Added ability to chagne heatmap fontsize and add annotation for pseudotime
+
 **genesorteR is an R package for single cell data analysis. It calculates a specificity score to rank all genes in each cell cluster. It can then use this ranking to find sets of marker genes or to find highly variable or differentially expressed genes. genesorteR is applicable to scRNA-Seq data as well as other sparse single cell data like scATAC-Seq** 
 
 **genesorteR is relatively quick, just seconds for 100k cells, few minutes for millions of cells. Read more [in genesorteR's pre-print](https://www.biorxiv.org/content/10.1101/676379v2).** 
@@ -28,7 +32,7 @@ Install genesorteR
 install.packages("devtools") 
 
 #install genesorteR from the Github repository
-devtools::install_github("mahmoudibrahim/genesorteR") 
+devtools::install_github("elliefewings/genesorteR") 
 ```
 
 
